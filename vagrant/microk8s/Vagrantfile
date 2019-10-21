@@ -1,0 +1,20 @@
+# Box / OS
+VM_PROVIDER = 'hyperv'
+VAGRANT_BOX = 'bento/ubuntu-16.04'
+VM_NAME = 'microk8s.vagrantup.com'
+VM_USER = 'vagrant'
+
+Vagrant.configure('2') do |config|
+    config.vm.box = VAGRANT_BOX
+    config.vm.box_check_update = false
+    config.vm.host_name = VM_NAME
+    config.vm.provider VM_PROVIDER do |vb|
+      vb.cpus = 1
+      vb.memory = 2048
+    config.vm.boot_timeout = 100
+    config.vm.synced_folder ".", "/home/vagrant/workspace", type: "smb"
+    config.vm.synced_folder ".", "/usr/src", type: "smb"
+    end
+    config.vm.provision 'shell', path: 'provision.sh'
+  end
+  

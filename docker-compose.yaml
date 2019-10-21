@@ -1,0 +1,27 @@
+version: '3.2'
+
+services:
+  terrafrom:
+    image: proj-terraform:latest
+    restart: "no"
+    container_name: "terraform"
+    tty: true
+    env_file:
+      - .\terraform\src\config.env
+    volumes:
+      - type: bind
+        source: '.\terraform\src'
+        target: /apps/terraform
+    entrypoint: /bin/sh
+  helm:
+    image: proj-helm:latest
+    restart: "no"
+    container_name: "helm"
+    tty: true
+    env_file:
+      - .\helm\src\config.env
+    volumes:
+      - type: bind
+        source: '.\helm\src'
+        target: /apps/helm
+    entrypoint: /bin/sh

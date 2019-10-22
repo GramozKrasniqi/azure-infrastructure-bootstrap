@@ -8,6 +8,7 @@ terraform init \
 --backend-config="resource_group_name=$st_resource_group_name" \
 --backend-config="storage_account_name=$st_storage_account_name" \
 --backend-config="container_name=$st_container_name" \
---backend-config="key=$st_key" 
+--backend-config="key=test" \
+--backend-config="access_key=$st_key" 
 
 terraform workspace new $environment
